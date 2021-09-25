@@ -6,11 +6,16 @@
       <AddTodo
         @add-todo="addTodo"
       />
+      <select v-model="filter">
+          <option value="all">All</option>
+          <option value="completed">Completed</option>
+          <option value="not-completed">Not completed</option>
+      </select>
       <hr/>
       <Loader v-if="loading"/>
       <todo-list
         v-else-if="todos.length"
-        v-bind:todos="todos"
+        v-bind:todos="filteredTodos"
         @remove-todo="removeTodo"
       />
       <p v-else>No todos</p>
@@ -26,9 +31,27 @@ export default {
   data(){
     return{
       todos:[],
-      loading: true
+      loading: true,
+      filter: 'all'
     }
   },
+  computed:{
+      filteredTodos(){
+          
+          if(this.filter === 'completed'){
+              return this.todos.filter(t => t.completed)
+          }
+          if(this.filter === 'not-completed'){
+              return this.todos.filter(t => !t.completed)
+          }
+          return this.todos
+      }
+  },
+//   watch:{
+//       filter(value){
+
+//       }
+//   },
   mounted(){
 fetch('https://jsonplaceholder.typicode.com/todos?_limit=3')
   .then(response => response.json())
