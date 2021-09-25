@@ -16,9 +16,9 @@ export default {
   data(){
     return{
       todos:[
-        {id:1,title: 'But bread',completed:false},
-        {id:2,title: 'But butter',completed:false},
-        {id:3,title: 'But milk',completed:false}
+        {id:1,title: 'Buy bread',completed:false},
+        {id:2,title: 'Buy butter',completed:false},
+        {id:3,title: 'Buy milk',completed:false}
       ]
     }
   },
